@@ -1,0 +1,34 @@
+<div class="max-w-5xl mx-auto mt-10">
+  <h1 class="text-3xl font-bold mb-6">Bloques de vuelo</h1>
+
+  <%= link_to "Crear nuevo bloque", new_flight_block_path,
+      class: "mb-4 inline-block bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded" %>
+
+  <table class="min-w-full bg-white shadow rounded">
+    <thead class="bg-gray-50">
+      <tr>
+        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500">Avión</th>
+        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500">Instructor</th>
+        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500">Estudiante</th>
+        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500">Inicio</th>
+        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500">Fin</th>
+        <th class="px-6 py-3"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @flight_blocks.each do |block| %>
+        <tr class="border-b">
+          <td class="px-6 py-4"><%= block.aircraft.identifier %></td>
+          <td class="px-6 py-4"><%= block.instructor.name %></td>
+          <td class="px-6 py-4"><%= block.student.name %></td>
+          <td class="px-6 py-4"><%= block.start_time.strftime("%d/%m/%Y %H:%M") %></td>
+          <td class="px-6 py-4"><%= block.end_time.strftime("%d/%m/%Y %H:%M") %></td>
+          <td class="px-6 py-4">
+            <%= link_to "Editar", edit_flight_block_path(block), class: "text-indigo-600 hover:text-indigo-900" %> |
+            <%= link_to "Eliminar", flight_block_path(block), method: :delete, data: { confirm: "¿Estás seguro?" }, class: "text-red-600 hover:text-red-800" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

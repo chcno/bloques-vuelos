@@ -1,0 +1,58 @@
+<div class="max-w-2xl mx-auto bg-white p-8 rounded shadow mt-10">
+  <%= form_with model: flight_block, local: true, class: "space-y-4" do |f| %>
+    <div>
+      <%= f.label :aircraft_id, "Avión", class: "block text-sm font-medium text-gray-700" %>
+      <%= f.collection_select :aircraft_id, Aircraft.all, :id, :identifier,
+        prompt: "Selecciona un avión",
+        class: "mt-1 block w-full border-gray-300 rounded-md shadow-sm" %>
+    </div>
+
+    <div>
+      <%= f.label :instructor_id, "Instructor", class: "block text-sm font-medium text-gray-700" %>
+      <%= f.collection_select :instructor_id, User.instructor, :id, :name,
+        prompt: "Selecciona un instructor",
+        class: "mt-1 block w-full border-gray-300 rounded-md shadow-sm" %>
+    </div>
+
+    <div>
+      <%= f.label :student_id, "Estudiante", class: "block text-sm font-medium text-gray-700" %>
+      <%= f.collection_select :student_id, User.student, :id, :name,
+        prompt: "Selecciona un estudiante",
+        class: "mt-1 block w-full border-gray-300 rounded-md shadow-sm" %>
+    </div>
+
+    <div>
+      <%= f.label :start_time, "Hora de inicio", class: "block text-sm font-medium text-gray-700" %>
+      <%= f.datetime_local_field :start_time,
+        class: "mt-1 block w-full border-gray-300 rounded-md shadow-sm" %>
+    </div>
+
+    <div>
+      <%= f.label :end_time, "Hora de fin", class: "block text-sm font-medium text-gray-700" %>
+      <%= f.datetime_local_field :end_time,
+        class: "mt-1 block w-full border-gray-300 rounded-md shadow-sm" %>
+    </div>
+
+    <div>
+      <%= f.label :notes, "Notas", class: "block text-sm font-medium text-gray-700" %>
+      <%= f.text_area :notes, rows: 3,
+        class: "mt-1 block w-full border-gray-300 rounded-md shadow-sm" %>
+    </div>
+
+    <% if flight_block.errors.any? %>
+      <div class="bg-red-100 text-red-700 px-4 py-3 rounded relative">
+        <strong class="font-bold">¡Errores encontrados!</strong>
+        <ul class="mt-2 list-disc list-inside">
+          <% flight_block.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div>
+      <%= f.submit flight_block.new_record? ? "Crear bloque de vuelo" : "Actualizar bloque de vuelo",
+        class: "w-full py-2 px-4 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded" %>
+    </div>
+  <% end %>
+</div>
