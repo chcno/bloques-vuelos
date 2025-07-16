@@ -1,17 +1,21 @@
-<div id="<%= dom_id aircraft %>" class="w-full sm:w-auto my-5 space-y-5">
-  <div>
-    <strong class="block font-medium mb-1">Modelo:</strong>
-      <%= aircraft.model %>
-
-    </div>
-  <div>
-    <strong class="block font-medium mb-1">Matricula</strong>
-        <%= aircraft.identifier %>
-
+<div id="<%= dom_id aircraft %>" class="space-y-2 text-gray-700">
+  
+  <div class="flex justify-between items-center">
+    <span class="text-sm text-gray-500">Modelo</span>
+    <span class="text-base font-medium"><%= aircraft.model %></span>
   </div>
-  <div>
-    <strong class="block font-medium mb-1">Status:</strong>
-    <%= aircraft.status %>
+
+  <div class="flex justify-between items-center">
+    <span class="text-sm text-gray-500">Matrícula</span>
+    <span class="text-base"><%= aircraft.identifier %></span>
   </div>
+
+  <div class="flex justify-between items-center">
+    <span class="text-sm text-gray-500">Status</span>
+    <span class="inline-block rounded-full px-2 py-1 text-xs font-semibold
+      <%= aircraft.status == "Active" ? "bg-green-100 text-green-700" : "bg-gray-100 text-gray-700" %>">
+      <%= aircraft.status %>
+    </span>
+  </div>
+
 </div>
-

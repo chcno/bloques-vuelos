@@ -1,0 +1,14 @@
+  <tr class="hover:bg-gray-50">
+        <td class="py-3 px-4 text-gray-700"><%= user.name %></td>
+        <td class="py-3 px-4 text-gray-700"><%= user.email %></td>
+        <td class="py-3 px-4 text-gray-700 capitalize"><%= user.role %></td>
+        <td class="py-3 px-4 flex space-x-2">
+          <%= link_to "Editar", edit_admin_user_path(user),
+              class: "inline-flex items-center px-4 py-2 bg-yellow-500 border border-transparent rounded-md font-semibold text-white hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500" %>
+
+          <%= button_to "Eliminar", admin_user_path(user),
+              method: :delete,
+              data: { confirm: "¿Estás seguro de que quieres eliminar este usuario?" },
+              class: "inline-flex items-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500" %>
+        </td>
+      </tr>

@@ -1,29 +1,44 @@
 <% content_for :title, "Aircrafts" %>
 
-<div class="w-full">
+<div class="w-full max-w-6xl mx-auto py-8">
+  
   <% if notice.present? %>
-    <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-md inline-block" id="notice"><%= notice %></p>
+    <div id="notice" class="mb-6 rounded-md bg-green-50 border border-green-200 p-4 flex items-center space-x-3">
+      <svg class="h-5 w-5 text-green-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+      </svg>
+      <span class="text-green-700 font-medium"><%= notice %></span>
+    </div>
   <% end %>
 
-  <div class="flex justify-between items-center">
-    <h1 class="font-bold text-4xl">Aircrafts</h1>
-    <%= link_to "New aircraft", new_aircraft_path, class: "rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white block font-medium" %>
+  <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4">
+    <h1 class="text-3xl font-bold text-gray-800">Aircrafts</h1>
+    <%= link_to "New Aircraft", new_aircraft_path, class: "inline-flex items-center rounded-md bg-blue-600 px-4 py-2 text-white font-medium hover:bg-blue-500 transition" %>
   </div>
 
-  <div id="aircrafts" class="min-w-full divide-y divide-gray-200 space-y-5">
-    <% if @aircrafts.any? %>
+  <% if @aircrafts.any? %>
+    <div id="aircrafts" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
       <% @aircrafts.each do |aircraft| %>
-        <div class="flex flex-col sm:flex-row justify-between items-center pb-5 sm:pb-0">
+        <div class="border border-gray-200 rounded-lg shadow-sm p-5 flex flex-col justify-between h-full bg-white">
+          
+          <!-- Render aircraft partial -->
           <%= render aircraft %>
-          <div class="w-full sm:w-auto flex flex-col sm:flex-row space-x-2 space-y-2">
-            <%= link_to "Show", aircraft, class: "w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
-            <%= link_to "Edit", edit_aircraft_path(aircraft), class: "w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
-            <%= button_to "Destroy", aircraft, method: :delete, class: "w-full sm:w-auto rounded-md px-3.5 py-2.5 text-white bg-red-600 hover:bg-red-500 font-medium cursor-pointer", data: { turbo_confirm: "Are you sure?" } %>
+
+          <div class="mt-4 flex flex-col sm:flex-row sm:space-x-2 sm:space-y-0 space-y-2">
+            <%= link_to "Show", aircraft, class: "inline-block w-full sm:w-auto text-center rounded-md border border-gray-300 px-4 py-2 text-gray-700 hover:bg-gray-50 font-medium transition" %>
+            
+            <%= link_to "Edit", edit_aircraft_path(aircraft), class: "inline-block w-full sm:w-auto text-center rounded-md border border-gray-300 px-4 py-2 text-gray-700 hover:bg-gray-50 font-medium transition" %>
+            
+            <%= button_to "Destroy", aircraft, method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "inline-block w-full sm:w-auto text-center rounded-md bg-red-600 text-white px-4 py-2 font-medium hover:bg-red-500 transition" %>
           </div>
+          
         </div>
       <% end %>
-    <% else %>
-      <p class="text-center my-10">No aircrafts found.</p>
-    <% end %>
-  </div>
+    </div>
+  <% else %>
+    <div class="text-center py-12">
+      <p class="text-gray-500 text-lg">No aircrafts found.</p>
+    </div>
+  <% end %>
+  
 </div>

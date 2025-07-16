@@ -1,5 +1,7 @@
-<div class="max-w-2xl mx-auto bg-white p-8 rounded shadow mt-10">
+<div data-controller="flight-block" class="max-w-2xl mx-auto bg-white p-8 rounded shadow mt-10">
   <%= form_with model: flight_block, local: true, class: "space-y-4" do |f| %>
+
+    <!-- Avión -->
     <div>
       <%= f.label :aircraft_id, "Avión", class: "block text-sm font-medium text-gray-700" %>
       <%= f.collection_select :aircraft_id, Aircraft.all, :id, :identifier,
@@ -7,20 +9,55 @@
         class: "mt-1 block w-full border-gray-300 rounded-md shadow-sm" %>
     </div>
 
+    <!-- Tipo de vuelo -->
     <div>
-      <%= f.label :instructor_id, "Instructor", class: "block text-sm font-medium text-gray-700" %>
-      <%= f.collection_select :instructor_id, User.instructor, :id, :name,
-        prompt: "Selecciona un instructor",
-        class: "mt-1 block w-full border-gray-300 rounded-md shadow-sm" %>
+      <%= f.label :flight_type, "Tipo de vuelo", class: "block text-sm font-medium text-gray-700" %>
+     <%= f.select :flight_type,
+    options_for_select([
+      ["Vuelo de instrucción", "instruccion"],
+      ["Vuelo safety", "safety"],
+      ["Vuelo compartido", "compartido"],
+      ["Prueba ACC", "prueba_acc"]
+    ], selected: flight_block.flight_type),
+    { prompt: "Selecciona un tipo de vuelo" },
+    { class: "mt-1 block w-full border-gray-300 rounded-md shadow-sm",
+      data: { action: "change->flight-block#change" } } %>
+
     </div>
 
+    <!-- Instructor -->
+    <div data-flight-block-target="instructor" class="hidden">
+      <%= f.label :instructor_id, "Instructor", class: "block text-sm font-medium text-gray-700" %>
+      <%= f.collection_select :instructor_id, User.instructor, :id, :name,
+            prompt: "Selecciona un instructor",
+            class: "mt-1 block w-full border-gray-300 rounded-md shadow-sm" %>
+    </div>
+
+    <!-- Safety -->
+    <div data-flight-block-target="safety" class="hidden">
+      <%= f.label :safety_id, "Safety", class: "block text-sm font-medium text-gray-700" %>
+      <%= f.collection_select :safety_id, User.safety, :id, :name,
+            prompt: "Selecciona un safety",
+            class: "mt-1 block w-full border-gray-300 rounded-md shadow-sm" %>
+    </div>
+
+    <!-- Estudiante -->
     <div>
       <%= f.label :student_id, "Estudiante", class: "block text-sm font-medium text-gray-700" %>
       <%= f.collection_select :student_id, User.student, :id, :name,
-        prompt: "Selecciona un estudiante",
-        class: "mt-1 block w-full border-gray-300 rounded-md shadow-sm" %>
+            prompt: "Selecciona un estudiante",
+            class: "mt-1 block w-full border-gray-300 rounded-md shadow-sm" %>
     </div>
 
+    <!-- Segundo estudiante -->
+    <div data-flight-block-target="student2" class="hidden">
+      <%= f.label :student2_id, "Segundo estudiante", class: "block text-sm font-medium text-gray-700" %>
+      <%= f.collection_select :student2_id, User.student, :id, :name,
+            prompt: "Selecciona un segundo estudiante",
+            class: "mt-1 block w-full border-gray-300 rounded-md shadow-sm" %>
+    </div>
+
+    <!-- Horas -->
     <div>
       <%= f.label :start_time, "Hora de inicio", class: "block text-sm font-medium text-gray-700" %>
       <%= f.datetime_local_field :start_time,
@@ -33,12 +70,14 @@
         class: "mt-1 block w-full border-gray-300 rounded-md shadow-sm" %>
     </div>
 
+    <!-- Notas -->
     <div>
       <%= f.label :notes, "Notas", class: "block text-sm font-medium text-gray-700" %>
       <%= f.text_area :notes, rows: 3,
         class: "mt-1 block w-full border-gray-300 rounded-md shadow-sm" %>
     </div>
 
+    <!-- Errores -->
     <% if flight_block.errors.any? %>
       <div class="bg-red-100 text-red-700 px-4 py-3 rounded relative">
         <strong class="font-bold">¡Errores encontrados!</strong>
@@ -50,9 +89,11 @@
       </div>
     <% end %>
 
+    <!-- Botón -->
     <div>
       <%= f.submit flight_block.new_record? ? "Crear bloque de vuelo" : "Actualizar bloque de vuelo",
         class: "w-full py-2 px-4 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded" %>
     </div>
+
   <% end %>
 </div>

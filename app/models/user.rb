@@ -6,8 +6,9 @@ class User < ApplicationRecord
 
     enum :role, {
       pending: 0,
-      admin: 1,
+      student: 1,
       instructor: 2,
-      student: 3
+      safety: 3,
+      admin: 4
     }
 end

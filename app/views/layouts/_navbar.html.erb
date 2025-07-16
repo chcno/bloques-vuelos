@@ -1,0 +1,39 @@
+<% if user_signed_in? %>
+<nav class="bg-gray-900 shadow-sm">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between h-16 items-center">
+      
+      <!-- Branding -->
+      <div class="flex items-center space-x-4">
+        <%= link_to root_path, class: "flex items-center space-x-2" do %>
+          <span class="text-white text-2xl font-bold">✈ Vuelos Escuela</span>
+        <% end %>
+      </div>
+      
+      <!-- Menu Links -->
+      <div class="hidden md:flex space-x-2">
+        <%= link_to "Calendario", calendar_path, class: "text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition" %>
+    <% if is_admin? %>
+
+        <%= link_to "Usuarios Pendientes", admin_pending_users_path, class: "text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition" %>
+        <%= link_to "Todos los Usuarios", admin_users_path, class: "text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition" %>
+        <%= link_to "Mantenimientos", admin_maintenances_path, class: "text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition" %>
+        <%= link_to "Aviones", aircrafts_path, class: "text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition" %>
+        <%= link_to "Bloques de vuelo", flight_blocks_path, class: "text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition" %>
+        <%= link_to "Nuevo Bloque", new_flight_block_path, class: "text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition" %>
+     <% end %>
+
+        </div>
+
+      <!-- User Info -->
+     <div class="hidden md:flex items-center space-x-3 text-gray-300 text-sm">
+  <span class="text-white font-semibold">Soy un <%= current_user.role %></span>
+  <span class="text-gray-300">(<%= current_user.email %>)</span>
+  
+  <%= button_to "Cerrar sesión", destroy_user_session_path, method: :delete, class: "ml-4 inline-block px-3 py-2 rounded-md bg-red-600 text-white text-sm font-medium hover:bg-red-500 transition" %>
+</div>
+
+    </div>
+  </div>
+</nav>
+<%end%>

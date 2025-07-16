@@ -1,0 +1,22 @@
+<h1 class="text-3xl font-bold mb-6 text-gray-800">Todos los Usuarios</h1>
+<%= form_with url: admin_users_path, method: :get, data: { turbo_frame: "users" } do |f| %>
+  <%= f.text_field :query, placeholder: "Buscar usuarios...", class: "border px-2 py-1 rounded" %>
+  <%= f.submit "Buscar", class: "bg-blue-500 text-white px-3 py-1 rounded" %>
+<% end %>
+<table class="min-w-full bg-white border border-gray-200 rounded-lg shadow-sm">
+  <thead class="bg-gray-800 text-white">
+    <tr>
+      <th class="py-3 px-4 text-left">Nombre</th>
+      <th class="py-3 px-4 text-left">Email</th>
+      <th class="py-3 px-4 text-left">Rol</th>
+      <th class="py-3 px-4 text-left">Acciones</th>
+    </tr>
+  </thead>
+  <turbo-frame id="users">
+  <tbody class="divide-y divide-gray-200">
+    <% @users.each do |user| %>
+    <%= render partial: "users", locals:{user: user} %>
+    <% end %>
+  </tbody>
+  </turbo-frame>
+</table>

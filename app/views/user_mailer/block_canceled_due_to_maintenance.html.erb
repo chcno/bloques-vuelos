@@ -1,0 +1,19 @@
+<h1 style="color: #b91c1c;">CANCELADO</h1>
+
+<p>
+  Tu bloque con el avión <strong><%= @aircraft.identifier %></strong>,
+  previsto para el
+  <strong><%= @block.start_time.strftime("%d/%m/%Y %H:%M") %></strong>
+  hasta <strong><%= @block.end_time.strftime("%d/%m/%Y %H:%M") %></strong>
+  ha sido <strong>cancelado</strong> debido a un mantenimiento.
+</p>
+
+<% if @block.cancel_reason.present? %>
+  <p>
+    Motivo de la cancelación: <%= @block.cancel_reason %>
+  </p>
+<% end %>
+
+<p>
+  Lamentamos los inconvenientes.
+</p>

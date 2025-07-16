@@ -1,3 +1,5 @@
+   require 'sidekiq/web'
+
 Rails.application.routes.draw do
   get "dashboard/index"
   resources :aircrafts
@@ -14,6 +16,41 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
    root "dashboard#index"
+   resources :dashboard, only: [:index] do
+    collection do
+      get :profile
+    end
+  end
+   get "flight_blocks/calendar", to: "flight_blocks#calendar", as: :calendar
+
    resources :flight_blocks
+
+    resources :flight_blocks do
+      member do
+        patch :no_show
+      end
+    end
+   #get "calendar", to: "flight_blocks#calendar", as: :calendar
+
+  # tus otras rutas...
+
+  # Solo para admin. ¡PROTEGER ESTA RUTA!
+  authenticate :user, ->(u) { u.admin? } do
+    mount Sidekiq::Web => '/sidekiq'
+  end
+
+  namespace :admin do
+      get "pending", to: "users#pending", as: :pending_users
+  resources :maintenances, only: [:new, :create, :index, :destroy]
+
+    resources :users, only: [:index, :edit, :update, :destroy] do
+      member do
+        patch :approve
+      end
+    end
+  end
+
+  
+
 
 end

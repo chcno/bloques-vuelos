@@ -1,5 +1,6 @@
 class AircraftsController < ApplicationController
   before_action :set_aircraft, only: %i[ show edit update destroy ]
+  before_action :require_admin!
 
   # GET /aircrafts or /aircrafts.json
   def index

@@ -1,0 +1,36 @@
+<h1 class="text-3xl font-bold mb-8 text-gray-800">Mantenimientos</h1>
+
+<div class="flex justify-end mb-4">
+  <%= link_to "Nuevo Mantenimiento", new_admin_maintenance_path,
+      class: "inline-flex items-center px-4 py-2 bg-indigo-600 border border-transparent rounded-md font-semibold text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
+</div>
+
+<table class="min-w-full bg-white border border-gray-200 rounded-lg shadow-sm">
+  <thead class="bg-gray-800 text-white">
+    <tr>
+      <th class="py-3 px-4 text-left">Avión</th>
+      <th class="py-3 px-4 text-left">Inicio</th>
+      <th class="py-3 px-4 text-left">Fin</th>
+      <th class="py-3 px-4 text-left">Motivo</th>
+            <th class="py-3 px-4 text-left">Eliminar</th>
+
+    </tr>
+  </thead>
+  <tbody class="divide-y divide-gray-200">
+    <% @maintenances.each do |maintenance| %>
+      <tr class="hover:bg-gray-50">
+        <td class="py-3 px-4 text-gray-700"><%= maintenance.aircraft&.identifier || "N/A" %></td>
+        <td class="py-3 px-4 text-gray-700"><%= l(maintenance.start_time, format: :long) %></td>
+        <td class="py-3 px-4 text-gray-700"><%= l(maintenance.end_time, format: :long) %></td>
+        <td class="py-3 px-4 text-gray-700"><%= maintenance.reason.presence || "—" %></td>
+<td class="py-3 px-4 text-gray-700">
+  <%= button_to "Eliminar", admin_maintenance_path(maintenance), 
+      method: :delete,
+      data: { confirm: "¿Estás seguro de eliminar este mantenimiento?" },
+      class: "inline-flex items-center px-3 py-2 bg-red-600 border border-transparent rounded-md text-white font-semibold hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500" %>
+</td>
+
+      </tr>
+    <% end %>
+  </tbody>
+</table>

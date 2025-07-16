@@ -1,0 +1,5 @@
+<tbody class="divide-y divide-gray-200">
+    <% @users.each do |user| %>
+    <%= render partial: "users", locals:{user: user} %>
+    <% end %>
+  </tbody>
