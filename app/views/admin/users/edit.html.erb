@@ -14,6 +14,8 @@
   </div>
 
   <div>
+  <% unless current_user.admin? && current_user == @user %>
+  <div>
     <%= f.label :role, "Rol", class: "block text-gray-700 font-bold mb-2" %>
     <%= f.select :role,
           User.roles.keys
@@ -22,6 +24,13 @@
           {},
           class: "block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" %>
   </div>
+<% else %>
+  <div>
+    <label class="block text-gray-700 font-bold mb-2">Rol</label>
+    <p class="text-gray-600"><%= @user.role.titleize %></p>
+  </div>
+<% end %>
+
 
   <div class="flex space-x-4">
     <%= f.submit "Guardar Cambios",
