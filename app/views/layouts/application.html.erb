@@ -25,7 +25,11 @@
   </head>
 
   <body>
+   <% if user_signed_in? %>
 <%= render "layouts/navbar"%>
+    <% else %>
+      <%= render "layouts/second_navbar" %>
+    <% end %>
 <main class="max-w-7xl mx-auto p-6">
 <% if notice %>
   <div class="max-w-7xl mx-auto mt-4 px-4 py-3 bg-green-50 border border-green-200 text-green-700 rounded-md">
