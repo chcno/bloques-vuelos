@@ -6,21 +6,26 @@ class FlightBlockMailer < ApplicationMailer
   def notify_block(flight_block)
     @flight_block = flight_block
      # Crear evento .ics
-    cal = Icalendar::Calendar.new
-    event = cal.event
-    event.dtstart     = @flight_block.start_time
-    event.dtend       = @flight_block.end_time
-    event.summary     = "Bloque de Vuelo"
-    event.description = "Instructor: #{@flight_block.instructor.name}, Alumno: #{@flight_block.student.name}"
-    event.location    = "MagFlight Training"
-    event.uid         = SecureRandom.uuid
-    cal.publish
+    tzid = "America/Panama"  # GMT-5
 
-    # Adjuntar el archivo .ics
-    attachments["bloque_vuelo.ics"] = {
-      mime_type: 'text/calendar',
-      content: cal.to_ical
-    }
+cal = Icalendar::Calendar.new
+cal.timezone do |t|
+  t.tzid = tzid
+end
+
+event = cal.event
+event.dtstart     = Icalendar::Values::DateTime.new(@flight_block.start_time, 'tzid' => tzid)
+event.dtend       = Icalendar::Values::DateTime.new(@flight_block.end_time, 'tzid' => tzid)
+event.summary     = "Bloque de Vuelo"
+event.description = "Instructor: #{@flight_block.instructor.name}, Alumno: #{@flight_block.student.name}"
+event.location    = "MagFlight Training"
+event.uid         = SecureRandom.uuid
+cal.publish
+
+attachments["bloque_vuelo.ics"] = {
+  mime_type: 'text/calendar',
+  content: cal.to_ical
+}
 
     mail(
       to: [@flight_block.instructor.email, @flight_block.student.email],
