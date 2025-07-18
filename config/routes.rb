@@ -1,6 +1,9 @@
    require 'sidekiq/web'
 
 Rails.application.routes.draw do
+  get "availabilities/index"
+  get "availabilities/new"
+  get "availabilities/create"
   get "dashboard/index"
   resources :aircrafts
   devise_for :users
@@ -22,6 +25,12 @@ Rails.application.routes.draw do
     end
   end
    get "flight_blocks/calendar", to: "flight_blocks#calendar", as: :calendar
+
+   resources :availabilities, only: [:index, :new, :create]
+   resources :users do
+  delete 'availabilities', to: 'availabilities#destroy_by_user'
+end
+
 
    resources :flight_blocks
 

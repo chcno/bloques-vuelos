@@ -24,6 +24,8 @@
       <!-- Desktop Menu -->
       <div class="hidden md:flex space-x-2 items-center">
         <%= link_to "Calendario", calendar_path, class: "text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition" %>
+               <%= link_to "Enviar disponibilidad", availabilities_new_path, class: "block text-gray-300 hover:text-white px-3 py-2 text-sm" %>
+
         <% if is_admin? %>
           <%= link_to "Usuarios Pendientes", admin_pending_users_path, class: "text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition" %>
           <%= link_to "Todos los Usuarios", admin_users_path, class: "text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition" %>
@@ -49,7 +51,8 @@
         <%= link_to "Aviones", aircrafts_path, class: "block text-gray-300 hover:text-white px-3 py-2 text-sm" %>
         <%= link_to "Bloques de vuelo", flight_blocks_path, class: "block text-gray-300 hover:text-white px-3 py-2 text-sm" %>
         <%= link_to "Nuevo Bloque", new_flight_block_path, class: "block text-gray-300 hover:text-white px-3 py-2 text-sm" %>
-      <% end %>
+     
+        <% end %>
       <div class="px-3 text-sm text-gray-400">Soy un <%= current_user.role %> (<%= current_user.email %>)</div>
       <%= button_to "Cerrar sesión", destroy_user_session_path, method: :delete, class: "block w-full text-left px-3 py-2 rounded-md bg-red-600 text-white text-sm font-medium hover:bg-red-500 transition mt-2" %>
     </div>
