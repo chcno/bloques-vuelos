@@ -30,6 +30,20 @@ Rails.application.configure do
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   config.force_ssl = true
 
+
+
+  config.action_mailer.delivery_method = :smtp
+config.action_mailer.default_url_options = { host: 'bloques.magflighttraining.com/', protocol: 'https' }
+
+config.action_mailer.smtp_settings = {
+  address:              'smtp.gmail.com',
+  port:                 587,
+  user_name:            ENV['GMAIL_USER'],
+  password:             ENV['GMAIL_PASSWORD'],
+  authentication:       'plain',
+  enable_starttls_auto: true
+}
+
   # Skip http-to-https redirect for the default health check endpoint.
   # config.ssl_options = { redirect: { exclude: ->(request) { request.path == "/up" } } }
 
