@@ -7,7 +7,6 @@
       <div class="flex items-center space-x-4">
         <%= link_to root_path, class: "flex items-center space-x-2" do %>
           <%= image_tag "logo.jpg", alt: "Logo", class: "h-10 w-10 rounded-full object-cover" %>
-          <span class="text-white text-xl font-bold">✈ Bloques de Vuelo</span>
         <% end %>
       </div>
 
@@ -26,14 +25,28 @@
         <%= link_to "Calendario", calendar_path, class: "text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition" %>
                <%= link_to "Enviar disponibilidad", availabilities_new_path, class: "block text-gray-300 hover:text-white px-3 py-2 text-sm" %>
 
-        <% if is_admin? %>
-          <%= link_to "Usuarios Pendientes", admin_pending_users_path, class: "text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition" %>
-          <%= link_to "Todos los Usuarios", admin_users_path, class: "text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition" %>
-          <%= link_to "Mantenimientos", admin_maintenances_path, class: "text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition" %>
-          <%= link_to "Aviones", aircrafts_path, class: "text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition" %>
-          <%= link_to "Bloques de vuelo", flight_blocks_path, class: "text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition" %>
-          <%= link_to "Nuevo Bloque", new_flight_block_path, class: "text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition" %>
-        <% end %>
+      <% if is_admin? %>
+ <div class="relative hover:block focus-within:block">
+  <div class="group inline-block relative">
+    <button class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium focus:outline-none">
+      Administración ▾
+    </button>
+
+    <div class="absolute hidden group-hover:block group-focus-within:block right-0 mt-2 bg-white text-gray-800 rounded-md shadow-lg w-56 z-50">
+                   <%= link_to "Ver disponibilidad", availabilities_index_path, class: "block px-4 py-2 text-sm hover:bg-gray-100" %>
+  
+    <%= link_to "Usuarios Pendientes", admin_pending_users_path, class: "block px-4 py-2 text-sm hover:bg-gray-100" %>
+      <%= link_to "Todos los Usuarios", admin_users_path, class: "block px-4 py-2 text-sm hover:bg-gray-100" %>
+      <%= link_to "Mantenimientos", admin_maintenances_path, class: "block px-4 py-2 text-sm hover:bg-gray-100" %>
+      <%= link_to "Aviones", aircrafts_path, class: "block px-4 py-2 text-sm hover:bg-gray-100" %>
+      <%= link_to "Bloques de vuelo", flight_blocks_path, class: "block px-4 py-2 text-sm hover:bg-gray-100" %>
+      <%= link_to "Nuevo Bloque", new_flight_block_path, class: "block px-4 py-2 text-sm hover:bg-gray-100" %>
+    </div>
+  </div>
+</div>
+
+<% end %>
+
 
         <span class="text-white font-semibold">Soy un <%= current_user.role %></span>
         <span class="text-gray-300">(<%= current_user.email %>)</span>
