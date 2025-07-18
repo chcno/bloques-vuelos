@@ -21,6 +21,8 @@ class DashboardController < ApplicationController
     .order(:start_time)
 
   #@aircrafts = Aircraft.where(status: "Active")
+    @my_availabilities = current_user.availabilities.order(:day, :start_time) if user_signed_in?
+
 end
 
   private
