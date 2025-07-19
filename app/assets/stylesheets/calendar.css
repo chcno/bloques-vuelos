@@ -1,0 +1,14 @@
+.fc-event.fc-green .fc-event-main {
+  background-color: #16a34a !important; /* Tailwind green-600 */
+  color: white !important;
+}
+
+.fc-event.fc-red .fc-event-main {
+  background-color: #dc2626 !important; /* Tailwind red-600 */
+  color: white !important;
+}
+
+.fc-event.fc-default .fc-event-main {
+  background-color: #4f46e5 !important; /* Tailwind indigo-600 */
+  color: white !important;
+}

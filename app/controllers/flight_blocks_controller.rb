@@ -70,8 +70,8 @@ end
             @flight_blocks = FlightBlock.all
             @maintenances = Maintenance.includes(:aircraft).all
 
-            events = @flight_blocks.map(&:as_calendar_event) +
-                    @maintenances.map(&:as_calendar_event)
+           events = @flight_blocks.map { |block| block.as_calendar_event(current_user) } +
+           @maintenances.map(&:as_calendar_event)
 
             respond_to do |format|
                 format.html

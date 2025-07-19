@@ -1,6 +1,11 @@
+<div class="mb-4 p-3 bg-green-100 border border-green-400 text-green-800 rounded text-sm">
+  ✅ <strong>Nota:</strong> Si el bloque aparece en <span class="font-semibold text-green-600">verde</span>, significa que estás asignado a ese vuelo.
+</div>
+
 <div class="container mx-auto flex-grow">
   <div 
     data-controller="calendar" 
-    class="max-w-6xl mx-auto mt-10 min-h-[80vh]">
+    class="max-w-6xl mx-auto mt-10 min-h-[80vh]"   data-calendar-current-user-id-value="<%= current_user.id %>"
+>
   </div>
 </div>

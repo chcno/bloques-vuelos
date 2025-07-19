@@ -5,10 +5,15 @@ import timeGridPlugin from "@fullcalendar/timegrid"
 import interactionPlugin from "@fullcalendar/interaction"
 
 export default class extends Controller {
+      static values = {
+      currentUserId: Number
+    }
+  
   connect() {
     console.log("✅ FullCalendar Stimulus Controller conectado!")
 
     const calendarEl = this.element
+    
 
     const calendar = new Calendar(calendarEl, {
       plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
@@ -78,10 +83,25 @@ export default class extends Controller {
   renderEventContent(arg) {
     const isMaintenance = arg.event.id.startsWith("maintenance-");
     const editUrl = `/flight_blocks/${arg.event.id}/edit`;
+    const assignedIds = arg.event.extendedProps.assigned_user_ids || []
+    const isAssignedToCurrentUser = assignedIds.includes(this.currentUserIdValue)
+    const isCancelled = !!arg.event.extendedProps.cancel_reason
 
+let eventBgColor
+
+    if (isCancelled) {
+      eventBgColor = "bg-red-800"
+    } else if (isAssignedToCurrentUser) {
+      eventBgColor = "bg-green-600"
+    } else if (isMaintenance) {
+      eventBgColor = "bg-red-800"
+    } else {
+      eventBgColor = "bg-indigo-600"
+    }
+  
     return {
       html: `
-             <div class="flex flex-col w-full">
+             <div class="flex flex-col w-full ${eventBgColor} p-2">
         <span class="text-[10px] text-white-500">${arg.timeText} </span>
         <div class="flex justify-between items-center">
           <span class="text-xs text-white-800">${arg.event.title}</span>
@@ -96,7 +116,7 @@ export default class extends Controller {
                </a>`
           }
         </div>
-<span class="text-xs text-indigo-200 bg-indigo-700 px-2 py-0.5 rounded">
+<span class="text-xs text-indigo-200 ${eventBgColor} px-2 py-0.5 rounded">
 📝 ${arg.event.extendedProps.notes || "S/N" } </span>   
 
 

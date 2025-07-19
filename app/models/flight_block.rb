@@ -44,12 +44,25 @@ class FlightBlock < ApplicationRecord
 
    
 
-    def as_calendar_event
+    def as_calendar_event(current_user)
       #title_text = if cancel_reason.present?
        # "CANCELADO - #{aircraft.identifier} - #{instructor&.name} / #{student&.name}"
       #else
      #   "#{aircraft.identifier} - #{instructor&.name} / #{student&.name}"
     #  end
+
+     is_mine = [instructor_id, student_id, student2_id, safety_id].compact.include?(current_user.id)
+
+  color_class =
+    if cancel_reason.present?
+      "fc-red"
+    elsif is_mine
+      "fc-green"
+    else
+      "fc-default"
+    end
+
+  
   
  base_title = case flight_type
                when "instruccion"
@@ -76,10 +89,18 @@ class FlightBlock < ApplicationRecord
         start: start_time.iso8601,
         end: end_time.iso8601,
         notes: notes,
-        color: cancel_reason.present? ? "#EF4444" : "#6366f1",
+        className: color_class,
+
+        #color: cancel_reason.present? ? "#EF4444" : "#6366f1",
         extendedProps: {
           cancel_reason: cancel_reason,
-          notes: notes
+          notes: notes,  
+          assigned_user_ids: [
+            instructor_id,
+            student_id,
+            student2_id,
+            safety_id
+          ].compact
         }
       }
     end
