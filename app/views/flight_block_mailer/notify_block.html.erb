@@ -1,8 +1,30 @@
 <h1>¡Nuevo Bloque de Vuelo Asignado!</h1>
 
+
+
+
 <p><strong>Avión:</strong> <%= @flight_block.aircraft.identifier %></p>
-<p><strong>Instructor:</strong> <%= @flight_block.instructor.name %></p>
-<p><strong>Estudiante:</strong> <%= @flight_block.student.name %></p>
+
+
+
+
+<% if @flight_block.instructor.present? %>
+  <p><strong>Instructor:</strong> <%= @flight_block.instructor.name %></p>
+<% end %>
+
+<% if @flight_block.student.present? %>
+  <p><strong>Estudiante:</strong> <%= @flight_block.student.name %></p>
+<% end %>
+
+<% if @flight_block.student2.present? %>
+  <p><strong>Estudiante 2:</strong> <%= @flight_block.student2.name %></p>
+<% end %>
+
+<% if @flight_block.safety.present? %>
+  <p><strong>Safety:</strong> <%= @flight_block.safety.name %></p>
+<% end %>
+
+
 <p><strong>Inicio:</strong> <%= @flight_block.start_time.strftime("%d/%m/%Y %H:%M") %></p>
 <p><strong>Fin:</strong> <%= @flight_block.end_time.strftime("%d/%m/%Y %H:%M") %></p>
 <p><strong>Notas:</strong> <%= @flight_block.notes %></p>

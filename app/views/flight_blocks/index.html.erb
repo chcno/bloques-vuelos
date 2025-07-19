@@ -50,12 +50,13 @@
             <% end %>
           </td>
 
-          <td class="px-6 py-4">
-            <%= block.start_time.strftime("%d/%m/%Y %H:%M") %>
-          </td>
+       <td class="px-6 py-4">
+         <%= block.start_time.present? ? block.start_time.strftime("%d/%m/%Y %H:%M") : "Sin hora" %>
+      </td>
+
 
           <td class="px-6 py-4">
-            <%= block.end_time.strftime("%d/%m/%Y %H:%M") %>
+            <%= block.end_time.present? ?  block.end_time.strftime("%d/%m/%Y %H:%M") : "Sin hora" %>
           </td>
 
           <td class="px-6 py-4 text-right">

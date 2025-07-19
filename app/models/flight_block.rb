@@ -97,7 +97,7 @@ def validate_flight_type
   case flight_type
   when "instruccion"
     errors.add(:instructor_id, "es obligatorio") if instructor_id.blank?
-    errors.add(:student_id, "es obligatorio") if student_id.blank?
+   # errors.add(:student_id, "es obligatorio") if student_id.blank?
   when "safety"
     errors.add(:safety_id, "es obligatorio") if safety_id.blank?
     errors.add(:student_id, "es obligatorio") if student_id.blank?
