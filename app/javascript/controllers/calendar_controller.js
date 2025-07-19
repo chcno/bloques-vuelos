@@ -82,9 +82,11 @@ export default class extends Controller {
     return {
       html: `
              <div class="flex flex-col w-full">
-        <span class="text-xs text-white-500">${arg.timeText}</span>
+        <span class="text-[10px] text-white-500">${arg.timeText} </span>
         <div class="flex justify-between items-center">
-          <span class="text-sm text-white-800">${arg.event.title}</span>
+          <span class="text-xs text-white-800">${arg.event.title}</span>
+             
+
           ${
             isMaintenance
             ? ''

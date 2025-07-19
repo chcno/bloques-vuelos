@@ -32,6 +32,7 @@ end
     emails << @flight_block.student.email if @flight_block.student.present?
     emails << @flight_block.student2.email if @flight_block.student2.present?
     emails << @flight_block.safety.email if @flight_block.safety.present?
+
     mail(
       to: emails,
       subject: "Nuevo Bloque de Vuelo Asignado"
