@@ -59,7 +59,7 @@ end
     end
   end
 
-  
+  get "contacto", to: "pages#contacto"
 
 
 end
