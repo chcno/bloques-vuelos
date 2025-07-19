@@ -18,6 +18,9 @@ export default class extends Controller {
         center: 'title',
         right: 'dayGridMonth,timeGridWeek,timeGridDay'
       },
+        // ⏰ Aquí defines el rango horario visible:
+  slotMinTime: "06:00:00",  // Empieza a las 6 a.m.
+  slotMaxTime: "22:00:00",  // Termina a las 6 p.m.
       events: '/flight_blocks/calendar.json',
       editable: true,
       eventDrop: this.handleEventDrop.bind(this),
