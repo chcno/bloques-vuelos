@@ -85,9 +85,7 @@ export default class extends Controller {
         <span class="text-[10px] text-white-500">${arg.timeText} </span>
         <div class="flex justify-between items-center">
           <span class="text-xs text-white-800">${arg.event.title}</span>
-             
-
-          ${
+                       ${
             isMaintenance
             ? ''
             : `<a href="${editUrl}" 
@@ -98,7 +96,11 @@ export default class extends Controller {
                </a>`
           }
         </div>
-      `
+<span class="text-xs text-indigo-200 bg-indigo-700 px-2 py-0.5 rounded">
+📝 ${arg.event.extendedProps.notes || "S/N" } </span>   
+
+
+       `
     };
   }
   handleEventDidMount(info) {

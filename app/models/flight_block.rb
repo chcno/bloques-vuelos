@@ -4,10 +4,10 @@ class FlightBlock < ApplicationRecord
   belongs_to :safety, class_name: "User", optional: true
   belongs_to :student, class_name: "User", optional: true
   belongs_to :student2, class_name: "User", optional: true
-validate :validate_flight_type
+  validate :validate_flight_type
 
   validate :no_overlaps
- validate :airplane_not_in_maintenance
+  validate :airplane_not_in_maintenance
 
 
  STATUSES = ["Programado", "Realizado", "Cancelado", "No Show"]
@@ -50,7 +50,7 @@ validate :validate_flight_type
       #else
      #   "#{aircraft.identifier} - #{instructor&.name} / #{student&.name}"
     #  end
-
+  
  base_title = case flight_type
                when "instruccion"
                  "#{aircraft.identifier} - #{instructor&.name} / #{student&.name}"
@@ -75,9 +75,11 @@ validate :validate_flight_type
         title: title_text,
         start: start_time.iso8601,
         end: end_time.iso8601,
+        notes: notes,
         color: cancel_reason.present? ? "#EF4444" : "#6366f1",
         extendedProps: {
-          cancel_reason: cancel_reason
+          cancel_reason: cancel_reason,
+          notes: notes
         }
       }
     end
