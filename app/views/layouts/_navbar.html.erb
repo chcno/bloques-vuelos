@@ -23,7 +23,7 @@
       <!-- Desktop Menu -->
       <div class="hidden md:flex space-x-2 items-center">
         <%= link_to "Calendario", calendar_path, class: "text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition" %>
-               <%= link_to "Enviar disponibilidad", availabilities_new_path, class: "block text-gray-300 hover:text-white px-3 py-2 text-sm" %>
+        <%= link_to "Enviar disponibilidad", availabilities_new_path, class: "block text-gray-300 hover:text-white px-3 py-2 text-sm" %>
 
       <% if is_admin? %>
  <div class="relative hover:block focus-within:block">
@@ -33,8 +33,9 @@
     </button>
 
     <div class="absolute hidden group-hover:block group-focus-within:block right-0 mt-2 bg-white text-gray-800 rounded-md shadow-lg w-56 z-50">
-                   <%= link_to "Ver disponibilidad", availabilities_index_path, class: "block px-4 py-2 text-sm hover:bg-gray-100" %>
-  
+    <%= link_to "Ver disponibilidad", availabilities_index_path, class: "block px-4 py-2 text-sm hover:bg-gray-100" %>
+          <%= link_to "Enviar disponibilidad", availabilities_new_path, class: "block text-gray-300 hover:text-white px-3 py-2 text-sm" %>
+
     <%= link_to "Usuarios Pendientes", admin_pending_users_path, class: "block px-4 py-2 text-sm hover:bg-gray-100" %>
       <%= link_to "Todos los Usuarios", admin_users_path, class: "block px-4 py-2 text-sm hover:bg-gray-100" %>
       <%= link_to "Mantenimientos", admin_maintenances_path, class: "block px-4 py-2 text-sm hover:bg-gray-100" %>
@@ -57,8 +58,10 @@
     <!-- Mobile Menu -->
     <div id="mobile-menu" class="md:hidden hidden mt-4 space-y-2">
       <%= link_to "Calendario", calendar_path, class: "block text-gray-300 hover:text-white px-3 py-2 text-sm" %>
+      <%= link_to "Enviar disponibilidad", availabilities_new_path, class: "block text-gray-300 hover:text-white px-3 py-2 text-sm" %>
+
       <% if is_admin? %>
-                         <%= link_to "Ver disponibilidad", availabilities_index_path, class: "block px-4 py-2 text-sm hover:bg-gray-100" %>
+        <%= link_to "Ver disponibilidad", availabilities_index_path, class: "block px-4 py-2 text-sm hover:bg-gray-100" %>
 
         <%= link_to "Usuarios Pendientes", admin_pending_users_path, class: "block text-gray-300 hover:text-white px-3 py-2 text-sm" %>
         <%= link_to "Todos los Usuarios", admin_users_path, class: "block text-gray-300 hover:text-white px-3 py-2 text-sm" %>
