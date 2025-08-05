@@ -13,18 +13,31 @@ class AvailabilitiesController < ApplicationController
 
   def create
   current_user.availabilities.destroy_all
+  
+  notes = params[:availabilities][:notes]
+  errores = []
 
   params[:availabilities]&.each do |day, range|
-    next if range[:start_time].blank? || range[:end_time].blank?
+    next if range["start_time"].blank? || range["end_time"].blank?
 
-    current_user.availabilities.create!(
+    availability = current_user.availabilities.create!(
       day: day.to_i,
-      start_time: range[:start_time],
-      end_time: range[:end_time]
+      start_time: range["start_time"],
+      end_time: range["end_time"],
+      notes: notes
+
     )
+      errores << availability unless availability.save
+
   end
 
-  redirect_to availabilities_path, notice: "Disponibilidad guardada con éxito."
+ if errores.any?
+    flash.now[:alert] = "Debes completar el campo de notas"
+    render :new # o donde esté el formulario
+  else
+    redirect_to availabilities_path, notice: "Disponibilidad actualizada con éxito."
+  end
+
 end
 
 

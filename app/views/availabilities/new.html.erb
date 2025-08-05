@@ -30,6 +30,18 @@
           </div>
         </div>
       <% end %>
+      <% if flash[:alert] %>
+  <div class="text-red-600 text-sm mb-2"><%= flash[:alert] %></div>
+<% end %>
+
+  <div class="mb-4">
+  <label for="availabilities_notes" class="block text-sm font-medium text-gray-700">Notas generales</label>
+  <%= text_area_tag "availabilities[notes]", params.dig(:availabilities, :notes), rows: 3,
+      required: true,
+      class: "mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500 sm:text-sm",
+      placeholder: "Ej: Instructor preferido, vuelo compartido, prueba ACC, etc." %>
+</div>
+
 
       <div class="pt-4">
         <%= submit_tag "Guardar disponibilidad", class: "w-full bg-blue-600 text-white px-4 py-2 rounded-md font-medium hover:bg-blue-700 transition" %>
