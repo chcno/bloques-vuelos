@@ -17,10 +17,21 @@ end
       event.dtstart     = Icalendar::Values::DateTime.new(@flight_block.start_time, 'tzid' => tzid)
       event.dtend       = Icalendar::Values::DateTime.new(@flight_block.end_time, 'tzid' => tzid)
       event.summary     = "Bloque de Vuelo"
-      event.description = "Instructor: #{@flight_block.instructor.name}, Alumno: #{@flight_block.student.name}"
-      event.location    = "MagFlight Training"
-      event.uid         = SecureRandom.uuid
-      cal.publish
+      inst_name   = @flight_block.instructor&.name || "Sin instructor"
+    safety_name = @flight_block.safety&.name
+    students    = [@flight_block.student&.name, @flight_block.student2&.name].compact
+    students_s  = students.any? ? students.join(" / ") : "Sin alumnos"
+
+    desc_parts = []
+    desc_parts << "Instructor: #{inst_name}"
+    desc_parts << "Safety: #{safety_name}" if safety_name.present?
+    desc_parts << "Alumno(s): #{students_s}"
+
+    event.description = desc_parts.join(", ")
+    event.location    = "MagFlight Training"
+    event.uid         = SecureRandom.uuid
+
+    cal.publish
 
       attachments["bloque_vuelo.ics"] = {
         mime_type: 'text/calendar',
