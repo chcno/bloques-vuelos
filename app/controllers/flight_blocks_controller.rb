@@ -125,7 +125,7 @@ end
   end
 
   def flight_block_params
-    params.require(:flight_block).permit(
+    p =  params.require(:flight_block).permit(
       :aircraft_id,
       :instructor_id,
       :student_id,
@@ -136,6 +136,11 @@ end
       :end_time,
       :notes
     )
+        %i[instructor_id safety_id student_id student2_id].each do |k|
+          p[k] = nil if p[k].blank?
+        end
+
+      p
   end
 
   def authorize_admin!

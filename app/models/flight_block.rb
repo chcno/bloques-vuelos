@@ -23,14 +23,14 @@ class FlightBlock < ApplicationRecord
       errors.add(:base, "El avión está ocupado en ese horario.")
     end
 
+     if instructor_id.present? && flight_type != 'compartido' # quita esta condición si no aplica
     overlapping_instructor = FlightBlock
       .where(instructor_id: instructor_id)
       .where.not(id: id)
       .where("(start_time, end_time) OVERLAPS (?, ?)", start_time, end_time)
 
-    if overlapping_instructor.exists?
-      errors.add(:base, "El instructor está ocupado en ese horario.")
-    end
+    errors.add(:base, "El instructor está ocupado en ese horario.") if overlapping_instructor.exists?
+  end
 
     overlapping_student = FlightBlock
       .where(student_id: student_id)
