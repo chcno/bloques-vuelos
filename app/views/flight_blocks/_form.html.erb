@@ -52,7 +52,7 @@
     <!-- Segundo estudiante -->
     <div data-flight-block-target="student2" class="hidden">
       <%= f.label :student2_id, "Segundo estudiante", class: "block text-sm font-medium text-gray-700" %>
-      <%= f.collection_select :student2_id, User.student, :id, :name,
+      <%= f.collection_select :student2_id, User.student.order(:name), :id, :name,
             prompt: "Selecciona un segundo estudiante",
             class: "mt-1 block w-full border-gray-300 rounded-md shadow-sm" %>
     </div>
