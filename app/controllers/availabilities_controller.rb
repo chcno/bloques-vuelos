@@ -1,8 +1,12 @@
 class AvailabilitiesController < ApplicationController
   before_action :authenticate_user!
   before_action :require_admin!, only: [:index]
+
   def index
-    @availabilities_by_user = User.includes(:availabilities).where.not(availabilities: { id: nil })
+    #@availabilities_by_user = User.includes(:availabilities).where.not(availabilities: { id: nil })
+  users = User.includes(:availabilities).where.not(availabilities: { id: nil })
+  @availabilities_by_role = users.group_by(&:role)
+
 
   end
 
