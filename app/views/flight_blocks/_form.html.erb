@@ -44,7 +44,7 @@
     <!-- Estudiante -->
     <div>
       <%= f.label :student_id, "Estudiante", class: "block text-sm font-medium text-gray-700" %>
-      <%= f.collection_select :student_id, User.where(role: [:student, :admin]), :id, :name,
+      <%= f.collection_select :student_id, User.where(role: [:student, :admin]).order(:name), :id, :name,
             prompt: "Selecciona un estudiante",
             class: "mt-1 block w-full border-gray-300 rounded-md shadow-sm" %>
     </div>
@@ -61,6 +61,8 @@
     <div>
       <%= f.label :start_time, "Hora de inicio", class: "block text-sm font-medium text-gray-700" %>
       <%= f.datetime_local_field :start_time,
+        step: 1800, # 30 minutos en segundos
+
         class: "mt-1 block w-full border-gray-300 rounded-md shadow-sm", required: true %>
     </div>
 
