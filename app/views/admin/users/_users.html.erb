@@ -1,6 +1,8 @@
   <tr class="hover:bg-gray-50">
         <td class="py-3 px-4 text-gray-700"><%= user.name %></td>
         <td class="py-3 px-4 text-gray-700"><%= user.email %></td>
+                <td class="py-3 px-4 text-gray-700"><%= user.phone_number || "Sin numero" %></td>
+
         <td class="py-3 px-4 text-gray-700 capitalize"><%= user.role %></td>
         <td class="py-3 px-4 flex space-x-2">
           <%= link_to "Editar", edit_admin_user_path(user),
